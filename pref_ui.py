@@ -120,6 +120,12 @@ class PrefFrame(Frame):
 
         self.pack(fill=BOTH, expand=True)
 
+        widgets_order = [self.txt_gora_w, self.txt_vists_WE, self.txt_vists_WS,
+                         self.txt_gora_e, self.txt_vists_EW, self.txt_vists_ES,
+                         self.txt_gora_s, self.txt_vists_SW, self.txt_vists_SE]
+        for w in widgets_order:
+            w.lift()
+
     def calculate(self):
         ctrls = [self.txt_gora_w, self.txt_gora_e, self.txt_gora_s,
                     self.txt_vists_WE, self.txt_vists_WS, 
