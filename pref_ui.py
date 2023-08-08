@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import font
 from tkinter.ttk import Style
 import preference
 import logging
@@ -9,9 +10,9 @@ WIDTH = 400
 class PrefFrame(Frame):
     def __init__(self):
         super().__init__()
-        self.final_score_w = StringVar(value="0.000")
-        self.final_score_e = StringVar(value="0.000")
-        self.final_score_s = StringVar(value="0.000")
+        self.final_score_w = StringVar(value="0.00")
+        self.final_score_e = StringVar(value="0.00")
+        self.final_score_s = StringVar(value="0.00")
         self.initUI()
     
     def initUI(self):
@@ -70,7 +71,8 @@ class PrefFrame(Frame):
         # an attribute, as we are to access it
         self.txt_gora_w = Entry(frame_west_gora, width=4)
         self.txt_gora_w.pack(side=TOP)
-        Label(frame_west_gora, text='W', pady=20).pack(side=TOP)
+        bold_font = font.Font(weight='bold', size=24)
+        Label(frame_west_gora, text='W', pady=20, font=bold_font).pack(side=TOP)
         # an attribute, as we are to access it
         self.lbl_final_score_W = Label(frame_west_gora, textvariable=self.final_score_w, fg='red', pady=20)
         self.lbl_final_score_W.pack(side=BOTTOM)
@@ -79,7 +81,7 @@ class PrefFrame(Frame):
         # an attribute, as we are to access it
         self.txt_gora_e = Entry(frame_east_gora, width=4)
         self.txt_gora_e.pack(side=TOP)
-        Label(frame_east_gora, text='E', pady=20).pack(side=TOP)
+        Label(frame_east_gora, text='E', pady=20, font=bold_font).pack(side=TOP)
         # an attribute, as we are to access it
         self.lbl_final_score_E = Label(frame_east_gora, textvariable=self.final_score_e, fg='red', pady=20)
         self.lbl_final_score_E.pack(side=BOTTOM)
@@ -102,13 +104,15 @@ class PrefFrame(Frame):
 
         self.btn_calculate = Button(frame_south_gora, text="Calculate", command=self.calculate)
         self.btn_calculate.pack(side=LEFT)
-        self.lbl_final_score_S = Label(frame_south_gora, textvariable=self.final_score_s, fg='red', padx=80)
+        # Put label to add 80 pts space
+        Label(frame_south_gora, text="", padx=40).pack(side=LEFT)
+        self.lbl_final_score_S = Label(frame_south_gora, textvariable=self.final_score_s, fg='red')
         self.lbl_final_score_S.pack(side=LEFT)
         # an attribute, as we are to access it
         self.txt_gora_s = Entry(frame_south_gora, width=4)
         self.txt_gora_s.pack(side=RIGHT)
         Label(frame_south_gora, text='Gora S:').pack(side=RIGHT)
-        Label(frame_south_gora, text='S').pack(side=RIGHT, padx=20)
+        Label(frame_south_gora, text='S', font=bold_font).pack(side=RIGHT, padx=20)
 
         Label(frame_vists_SW, text="S -> W:").pack()
         self.txt_vists_SW = Entry(frame_vists_SW, width=4)
@@ -125,6 +129,8 @@ class PrefFrame(Frame):
                          self.txt_gora_s, self.txt_vists_SW, self.txt_vists_SE]
         for w in widgets_order:
             w.lift()
+        self.txt_gora_w.focus()
+
 
     def calculate(self):
         ctrls = [self.txt_gora_w, self.txt_gora_e, self.txt_gora_s,
