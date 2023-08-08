@@ -1,5 +1,5 @@
 from unittest import TestCase
-from preference import calculate_score
+import preference
 
 class TestCalculateScore(TestCase):
     def test_correct_calculation(self):
@@ -8,8 +8,5 @@ class TestCalculateScore(TestCase):
         Ge, Ves, Vew = 124, 154, 240
         Gs, Vsw, Vse = 82, 28, 142
 
-        w, e, s = calculate_score(Gw, Vwe, Vws, Ge, Ves, Vew, Gs, Vsw, Vse)
-        self.assertEqual(w, -1484)
-        self.assertEqual(e, 652)
-        self.assertEqual(s, 832)
-
+        w, e, s = preference.calculate_score(Gw, Vwe, Vws, Ge, Ves, Vew, Gs, Vsw, Vse)
+        self.assertEqual((w, e, s), (-1484, 652, 832))
