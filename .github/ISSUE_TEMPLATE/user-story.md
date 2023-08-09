@@ -11,8 +11,12 @@ assignees: ''
 **I need** [feature]
 **So that** [benefit]
 
-### Assumptions
+### Assumptions and decisions
 * an assumption
+
+### Success criteria
+
+#### Scenario 1
 
 ```gherkin 
 Given …
