@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import font
 from tkinter.ttk import Style
 import preference
-import logging
+import logging, argparse
 
 HEIGHT = 500
 WIDTH = 400
@@ -160,8 +160,21 @@ def get_int_or_set_error(ctrl):
     
     return val
 
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        prog='pref-ui',
+        description='A UI interface for pref-calc function to calculate Preference final score')
+    parser.add_argument('-l','--log-level', choices=['info', 'debug'], default='info')
+    args = parser.parse_args()
+
+    return args
+
 
 def main():
+    args = parse_arguments()
+    num_logging_level = getattr(logging, args.log_level.upper())
+    logging.basicConfig(level=num_logging_level)
+    logging.debug(f"Log level is set to {args.log_level}")
     root = Tk()
     root.geometry("400x500")
     app = PrefFrame()
