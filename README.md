@@ -14,8 +14,10 @@ This is a double-aimed project:
 ## Outcomes
 
 A CLI:
+![CLI](pref-calc-cli.png)
 
 A Tk UI:
+![Tk](pref-calc-tk.png)
 
 ## Tk tool usage
 
