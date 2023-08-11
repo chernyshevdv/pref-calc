@@ -133,10 +133,9 @@ class PrefFrame(Frame):
 
 
     def calculate(self):
-        ctrls = [self.txt_gora_w, self.txt_gora_e, self.txt_gora_s,
-                    self.txt_vists_WE, self.txt_vists_WS, 
-                    self.txt_vists_EW, self.txt_vists_ES,
-                    self.txt_vists_SW, self.txt_vists_SE]
+        ctrls = [self.txt_gora_w, self.txt_vists_WE, self.txt_vists_WS,
+                 self.txt_gora_e, self.txt_vists_ES, self.txt_vists_EW,
+                 self.txt_gora_s, self.txt_vists_SW, self.txt_vists_SE  ]
         vals = []
         for ct in ctrls:
             val = get_int_or_set_error(ct)
@@ -166,6 +165,8 @@ def parse_arguments():
         description='A UI interface for pref-calc function to calculate Preference final score')
     parser.add_argument('-l','--log-level', choices=['info', 'debug'], default='info')
     args = parser.parse_args()
+    if args.help:
+        print(args.accumulate(args.integers))
 
     return args
 

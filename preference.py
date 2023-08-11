@@ -5,6 +5,7 @@ def calculate_score(g_w, v_we, v_ws, g_e, v_es, v_ew, g_s, v_sw, v_se):
     Gets three sets of Gora and Vists and calculates the final score returning three values.
     Returns a tuple of final score: W, E, S
     """
+    logging.debug(f"calculate_score arguments: {locals()}")
     gora = [g_w, g_e, g_s]
     logging.debug(f"Parameters W: {(g_w, v_we, v_ws)}")
     logging.debug(f"Parameters E: {(g_e, v_es, v_ew)}")
