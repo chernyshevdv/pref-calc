@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import font
 from tkinter.ttk import Style
 import preference
-import logging
+import logging, argparse
 
 HEIGHT = 500
 WIDTH = 400
@@ -133,10 +133,9 @@ class PrefFrame(Frame):
 
 
     def calculate(self):
-        ctrls = [self.txt_gora_w, self.txt_gora_e, self.txt_gora_s,
-                    self.txt_vists_WE, self.txt_vists_WS, 
-                    self.txt_vists_EW, self.txt_vists_ES,
-                    self.txt_vists_SW, self.txt_vists_SE]
+        ctrls = [self.txt_gora_w, self.txt_vists_WE, self.txt_vists_WS,
+                 self.txt_gora_e, self.txt_vists_ES, self.txt_vists_EW,
+                 self.txt_gora_s, self.txt_vists_SW, self.txt_vists_SE  ]
         vals = []
         for ct in ctrls:
             val = get_int_or_set_error(ct)
@@ -160,8 +159,23 @@ def get_int_or_set_error(ctrl):
     
     return val
 
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        prog='pref-ui',
+        description='A UI interface for pref-calc function to calculate Preference final score')
+    parser.add_argument('-l','--log-level', choices=['info', 'debug'], default='info')
+    args = parser.parse_args()
+    if args.help:
+        print(args.accumulate(args.integers))
+
+    return args
+
 
 def main():
+    args = parse_arguments()
+    num_logging_level = getattr(logging, args.log_level.upper())
+    logging.basicConfig(level=num_logging_level)
+    logging.debug(f"Log level is set to {args.log_level}")
     root = Tk()
     root.geometry("400x500")
     app = PrefFrame()
