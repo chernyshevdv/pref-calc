@@ -168,8 +168,6 @@ def parse_arguments():
         description='A UI interface for pref-calc function to calculate Preference final score')
     parser.add_argument('-l', '--log-level', choices=['info', 'debug'], default='info')
     args = parser.parse_args()
-    if args.help:
-        print(args.accumulate(args.integers))
 
     return args
 
@@ -182,7 +180,7 @@ def main():
     root = Tk()
     root.geometry("400x500")
     app = PrefFrame()
-    root.mainloop()
+    app.mainloop()
 
 
 if __name__ == "__main__":
