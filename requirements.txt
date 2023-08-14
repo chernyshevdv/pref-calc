@@ -2,3 +2,4 @@ nose
 pinocchio
 coverage
 flask
+flake8
