@@ -1,11 +1,13 @@
-from tkinter import *
+from tkinter import BOTH, BOTTOM, LEFT, RAISED, RIGHT, TOP, Button, Entry, Label, StringVar, Frame, Tk
 from tkinter import font
 from tkinter.ttk import Style
 import preference
-import logging, argparse
+import logging
+import argparse
 
 HEIGHT = 500
 WIDTH = 400
+
 
 class PrefFrame(Frame):
     def __init__(self):
@@ -14,7 +16,7 @@ class PrefFrame(Frame):
         self.final_score_e = StringVar(value="0.00")
         self.final_score_s = StringVar(value="0.00")
         self.initUI()
-    
+
     def initUI(self):
         self.master.title("Pref Counter")
         self.style = Style()
@@ -131,11 +133,10 @@ class PrefFrame(Frame):
             w.lift()
         self.txt_gora_w.focus()
 
-
     def calculate(self):
         ctrls = [self.txt_gora_w, self.txt_vists_WE, self.txt_vists_WS,
                  self.txt_gora_e, self.txt_vists_ES, self.txt_vists_EW,
-                 self.txt_gora_s, self.txt_vists_SW, self.txt_vists_SE  ]
+                 self.txt_gora_s, self.txt_vists_SW, self.txt_vists_SE]
         vals = []
         for ct in ctrls:
             val = get_int_or_set_error(ct)
@@ -150,20 +151,22 @@ class PrefFrame(Frame):
         self.final_score_e.set(f"{f_e:.2f}")
         self.final_score_s.set(f"{f_s:.2f}")
 
+
 def get_int_or_set_error(ctrl):
     val = -1
     try:
         val = int(ctrl.get())
     except ValueError:
         ctrl.focus()
-    
+
     return val
+
 
 def parse_arguments():
     parser = argparse.ArgumentParser(
         prog='pref-ui',
         description='A UI interface for pref-calc function to calculate Preference final score')
-    parser.add_argument('-l','--log-level', choices=['info', 'debug'], default='info')
+    parser.add_argument('-l', '--log-level', choices=['info', 'debug'], default='info')
     args = parser.parse_args()
     if args.help:
         print(args.accumulate(args.integers))
