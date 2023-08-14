@@ -5,6 +5,7 @@ import logging
 
 app = Flask(__name__)
 
+
 def check_request_payload(payload_json):
     """Returns 0 if the payload is correct, otherwise returns string with error message"""
     if 'W' in payload_json:
@@ -22,7 +23,7 @@ def check_request_payload(payload_json):
             return "Missing a subsection in W section of the payload"
     else:
         return "No W section found in the payload"
-    
+
     if 'E' in payload_json:
         if 'G' in payload_json['E'] and 'Vw' in payload_json['E'] and 'Vs' in payload_json['E']:
             try:
@@ -38,7 +39,7 @@ def check_request_payload(payload_json):
             return "Missing a subsection in E section of the payload"
     else:
         return "No E section found in the payload"
-    
+
     if 'S' in payload_json:
         if 'G' in payload_json['S'] and 'Vw' in payload_json['S'] and 'Ve' in payload_json['S']:
             try:
@@ -54,8 +55,9 @@ def check_request_payload(payload_json):
             return "Missing a subsection in S section of the payload"
     else:
         return "No S section found in the payload"
-    
-    return 0 # everything is fine
+
+    return 0  # everything is fine
+
 
 @app.route('/api/v1/calculate', methods=['POST'])
 def calculate():
@@ -66,8 +68,8 @@ def calculate():
     if check != 0:
         logging.debug(f"Incorrect payload in request: {check}")
         return make_response(json.dumps({'error': check})), 400
-    
-    params = [] # now add g_w, v_we, v_ws, g_e, v_es, v_ew, g_s, v_se, v_sw
+
+    params = []  # now add g_w, v_we, v_ws, g_e, v_es, v_ew, g_s, v_se, v_sw
     params.append(int(data['W']['G']))
     params.append(int(data['W']['Ve']))
     params.append(int(data['W']['Vs']))
@@ -79,5 +81,5 @@ def calculate():
     params.append(int(data['S']['Ve']))
     w, e, s = preference.calculate_score(*params)
 
-    response_data = {'W': w, 'E': e, 'S': s }
+    response_data = {'W': w, 'E': e, 'S': s}
     return jsonify(response_data)
