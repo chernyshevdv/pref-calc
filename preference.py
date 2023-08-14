@@ -1,5 +1,6 @@
 import logging
 
+
 def calculate_score(g_w, v_we, v_ws, g_e, v_es, v_ew, g_s, v_sw, v_se):
     """
     Gets three sets of Gora and Vists and calculates the final score returning three values.
@@ -16,7 +17,7 @@ def calculate_score(g_w, v_we, v_ws, g_e, v_es, v_ew, g_s, v_sw, v_se):
     gora_amnisted = list(map(lambda g: g - amnister, gora))
     logging.debug(f"Gora aminsted: {gora_amnisted}")
     gw_a, ge_a, gs_a = tuple(gora_amnisted)
-    
+
     # Vists onto W:
     gw_in_vists = gw_a * 10 / 3
     v_ew += gw_in_vists
@@ -40,15 +41,16 @@ def calculate_score(g_w, v_we, v_ws, g_e, v_es, v_ew, g_s, v_sw, v_se):
     v_final_s = v_se - v_es + v_sw - v_ws
     v_final_e = v_es - v_se + v_ew - v_we
     v_final_w = v_ws - v_sw + v_we - v_ew
-    
+
     return v_final_w, v_final_e, v_final_s
+
 
 if __name__ == "__main__":
     # Get player names:
     player_w = input("Name for WEST player: ")
     player_e = input("Name for EAST player: ")
     player_s = input("Name for SOUTH player: ")
-    
+
     # Get figures for West
     print(f"{player_w} values:")
     g_w = int(input(f"Gora {player_w}: "))
